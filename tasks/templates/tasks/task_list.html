@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+
+{% block title %}tasks{% endblock %}
+
+{% block content %}
+{% comment %} <form action="post">
+    <input type="submit" class="btn-primary">
+</form> {% endcomment %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">Task</th>
+                <th class="text-center" scope="col">Priority</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for task in object_list %}
+                <td class="text-center" scope="col">
+                    {{task.title}}
+                </td>
+                <td class="text-center" scope="col" style="background-color:#{{task.priority.color|stringformat:"x"}}">
+                    {{task.priority}} 
+                </td>
+                <td class="text-center" scope="col" style="background-color:#{{task.status.color|stringformat:"x"}}">
+                    {{task.status}}
+                </td>
+                <td class="text-center" scope="col">
+                    {{task.deadline_date}}
+                </td>
+            </tr>
+            {% endfor %}
+    </div>
+        </tbody>
+    </table>
+    <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 text-center">
+                <form action="new_task" method="get">
+                    <input type="submit" value="New task" class="btn-primary">
+                </form>
+            </div>
+            <div class="col-4"></div>
+    </div>
+</div>
+{% endblock %}
